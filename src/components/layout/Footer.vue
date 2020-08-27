@@ -16,6 +16,11 @@ export default {
         text-align: center;
         background: #0e1726;
         color:#fff;
+        height:100%;
+    }
+
+    p {
+        height: 30px;
     }
 
     @media (max-width: 768px) {

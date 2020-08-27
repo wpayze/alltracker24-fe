@@ -63,6 +63,11 @@
           <label>Tel&eacute;fono</label>
           <input type="text" v-model="userinfo.customer.telephone" />
         </div>
+
+        <div class="card-form-input">
+          <label>C&eacute;dula</label>
+          <input type="text" v-model="userinfo.customer.identification" />
+        </div>
       </div>
 
       <div class="card-form" v-else>
@@ -94,32 +99,32 @@
       <div class="card-form">
         <div class="card-form-input">
           <label>Linea 1</label>
-          <input type="text" v-model="userinfo.address.line1" />
+          <input type="text" v-model="userinfo.defaultAddress.line1" />
         </div>
 
         <div class="card-form-input">
           <label>Linea 2</label>
-          <input type="text" v-model="userinfo.address.line2" />
+          <input type="text" v-model="userinfo.defaultAddress.line2" />
         </div>
 
         <div class="card-form-input">
           <label>Ciudad</label>
-          <input type="text" v-model="userinfo.address.city" />
+          <input type="text" v-model="userinfo.defaultAddress.city" />
         </div>
 
         <div class="card-form-input">
           <label>Departamento</label>
-          <input type="text" v-model="userinfo.address.department" />
+          <input type="text" v-model="userinfo.defaultAddress.department" />
         </div>
 
         <div class="card-form-input">
           <label>C&oacute;digo Postal</label>
-          <input type="text" v-model="userinfo.address.zipcode" />
+          <input type="text" v-model="userinfo.defaultAddress.zipcode" />
         </div>
 
         <div class="card-form-input">
           <label>Pa&iacute;s</label>
-          <input type="text" v-model="userinfo.address.country" disabled />
+          <input type="text" v-model="userinfo.defaultAddress.country" disabled />
         </div>
       </div>
 
@@ -139,32 +144,30 @@ export default {
     };
   },
   methods: {
-     ...mapActions(["updateUser"]),
+     ...mapActions(["updateUser", "fetchUser"]), 
     async uptUser() {
 
       var data = {
-        address:  this.userinfo.address,
+        address:  this.userinfo.defaultAddress,
         company:  this.userinfo.company,
         customer: this.userinfo.customer,
         user: {_id: this.user._id} //Pronto la password.
       };
 
-      let response = await this.updateUser(data);
+      let response = await this.updateUser({data, myUser: true});
       
       if ( !response.error ) {
         let nombre = response.customer ? response.customer.name : response.company.name;
-
         this.$toast.success(`Excelente ${nombre}. Datos actualizados correctamente.`);
       } else {
         this.$toast.error("Actualización de datos fallida.");
       }
     }
   },
-  mounted: function () {
-    if (this.user) {
-      this.userinfo = this.user;
-    }
-  },
+  created: function(){
+    this.fetchUser();
+    this.userinfo = this.user;
+  }
 };
 </script>
 

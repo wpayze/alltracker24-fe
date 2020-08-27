@@ -1,17 +1,13 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
+import Vuex from 'vuex'
+import Vue from 'vue'
 
-import createPersistedState from 'vuex-persistedstate';
-import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-default.css';
+import createPersistedState from 'vuex-persistedstate'
 
-import user from './modules/user';
+import user from './modules/user'
+import parcel from './modules/parcel'
 
 // Load Vuex
 Vue.use(Vuex);
-
-// Load Vue Toast
-Vue.use(VueToast);
 
 // Create store
 export default new Vuex.Store({
@@ -19,6 +15,7 @@ export default new Vuex.Store({
     storage: window.sessionStorage,
   })],
   modules: {
-    user
+    user,
+    parcel
   }
 });

@@ -6,6 +6,16 @@
                     <i class="fas fa-home"></i>Inicio
                 </li>
             </router-link>
+            <router-link to="/dashboard" class="route sidebar-opt">
+                <li class="sidebar-li">
+                    <i class="fas fa-tachometer-alt"></i>Panel Central
+                </li>
+            </router-link>
+            <router-link to="/parcels" class="route sidebar-opt">
+                <li class="sidebar-li">
+                    <i class="fas fa-box-open"></i>Paquetes
+                </li>
+            </router-link>
             <router-link to="/users" class="route sidebar-opt" v-if=" user.type == 'company' ">
                 <li class="sidebar-li">
                 <i class="fas fa-users"></i>Usuarios
@@ -16,16 +26,19 @@
                 <i class="fas fa-user"></i>Perfil de Usuario
                 </li>
             </router-link>
+            <router-link to="/configs" class="route sidebar-opt">
+                <li class="sidebar-li">
+                <i class="fas fa-cog"></i>Configuraci&oacute;n
+                </li>
+            </router-link>
         </ul>
     </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
     name: "Sidebar",
-    computed: mapGetters(["user"])
+    props: ["user"]
 }
 </script>
 

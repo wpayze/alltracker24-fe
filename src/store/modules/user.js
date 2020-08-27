@@ -33,11 +33,9 @@ const actions = {
             }
         });
         
-        console.table(response);
-
         commit("setUsers", response);
     },
-    async updateUser ( {commit}, data) {
+    async updateUser ( {commit}, {data, myUser}) {
         try {
 
             const { data: response } = await axios.put(server + "/user", 
@@ -48,7 +46,12 @@ const actions = {
                 }
             });
 
-            commit("setUser", response);
+            console.log(response);
+
+            if (myUser) {
+                commit("setUser", response);
+            }
+            
             return response;
 
         } catch (error) {
@@ -58,8 +61,8 @@ const actions = {
 }
 
 const mutations = {
-    setUser: (state, user) => (state.user = user),
-    setUsers: (state, users) => (state.users = users)
+    setUser: (state, user) => state.user = user,
+    setUsers: (state, users) => state.users = users
 }
 
 export default {

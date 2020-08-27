@@ -3,7 +3,7 @@
         <div id="header">
             <div id="header-logo">
                 <router-link to="/" class="route" id="logo-button">
-                    <span>AllTracker24</span>
+                    <span>AllTracker24 - {{ user.company.name }}</span>
                 </router-link>
             </div>
             <div id="header-user">
@@ -33,7 +33,8 @@ export default {
         currentRouteName() {
             return this.$route.name;
         }
-    }
+    },
+    props: ['user']
 }
 </script>
 
